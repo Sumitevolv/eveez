@@ -132,11 +132,17 @@
 <body>
 
 <div id="bg-video-wrap">
+  
+    Drop in real cinematic footage generated from the video prompt (see mooving-hero-video-prompt.txt)
+    by uncommenting the block below and setting real src/poster paths. Until then, the canvas
+    animation underneath plays as a fully designed stylized stand-in — nothing breaks either way.
+
   <video id="bg-video" autoplay muted loop playsinline preload="auto" poster="/assets/hero-poster.jpg">
     <source src="MOOVING_—_HERO_BACKGROUND_VIDE.mp4" type="video/webm" media="(min-width:821px)">
     <source src="/assets/hero-desktop.mp4" type="video/mp4" media="(min-width:821px)">
     <source src="/assets/hero-mobile.mp4" type="video/mp4">
   </video>
+
 </div>
 <canvas id="particle-canvas"></canvas>
 
@@ -228,7 +234,10 @@
     var seed = 17;
     function rand(){ seed = (seed*9301+49297)%233280; return seed/233280; }
 
-    while(x < W + 60){
+    var MAX_BUILDINGS = 0;   // <-- lower this number for fewer buildings
+    var builtCount = 0;
+    while(x < W + 60 && builtCount < MAX_BUILDINGS){
+      builtCount++;
       var bw = 34 + rand()*70;
       var bh = 40 + rand()*(H*0.42);
       var by = baseY - bh;
